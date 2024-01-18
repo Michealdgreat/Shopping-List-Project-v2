@@ -1,5 +1,4 @@
-﻿
-namespace ShoppingLibrary.DataAccess
+﻿namespace ShoppingLibrary.DataAccess
 {
     public interface ISqlDataAccess
     {
