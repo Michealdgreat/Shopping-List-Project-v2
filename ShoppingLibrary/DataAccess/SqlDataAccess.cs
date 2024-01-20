@@ -18,7 +18,7 @@ public class SqlDataAccess : ISqlDataAccess
     {
         string connectionString = _config.GetConnectionString(connectionStringName);
 
-        using IDbConnection connection = new SqlConnection(connectionString); //the connection close after the curly braces
+        using IDbConnection connection = new SqlConnection(connectionString); //A new connection string is created only for this method and the connection closes right after you leave the method
         //Dapper Query
         var Rows = await connection.QueryAsync<T>(storedProcedure,
                                            parameters,
@@ -27,7 +27,7 @@ public class SqlDataAccess : ISqlDataAccess
         return Rows.ToList();
     }
 
-    public Task SaveData<T>(string storedProcedure, T parameters, string connectionStringName) //returns a task
+    public Task SaveData<T>(string storedProcedure, T parameters, string connectionStringName) //returns a task and its equivalent to returning a void
     {
         string connectionString = _config.GetConnectionString(connectionStringName);
 
