@@ -5,45 +5,16 @@ using System.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using SymmetricSecurityKey = Microsoft.IdentityModel.Tokens.SymmetricSecurityKey;
+using Shopping_List_Project.StartUpConfig;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddAuthorization(opts =>
-{
-    opts.FallbackPolicy = new AuthorizationPolicyBuilder()
-    .RequireAuthenticatedUser()
-    .Build();
-});
-
-builder.Services.AddHealthChecks()
-    .AddSqlServer(builder.Configuration.GetConnectionString("Default"));
-
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer(opts =>
-    {
-        opts.TokenValidationParameters = new()
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration.GetValue<string>("Authentication:Issuer"),
-            ValidAudience = builder.Configuration.GetValue<string>("Authentication:Audience"),
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.ASCII.GetBytes(
-                builder.Configuration.GetValue<string>("Authentication:Secretkey")))
-
-        };
-    });
-
-builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+builder.AddShopServices(); //from dependency injection folder
+builder.AddShophealthCheck(); //from dependency injection folder
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

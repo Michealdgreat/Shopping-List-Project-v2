@@ -45,12 +45,12 @@ public class AuthenticationController : ControllerBase
     private UserData? ValidateCredentials(AuthenticationData data)
     {
         //TEST CODE: REPLACE THIS WITH A CALL TO YOUR AUTH SYSTEM
-        if ((CompareValues(data.UserName, "Micheal")) && (CompareValues(data.Password, "Shodammola")))
+        if ((CompareValues(data.UserName, "Micheal")) && (CompareValues(data.Password, "Shodamola")))
         {
-            return new UserData(1, "Micheal", "Dgreat", data.UserName);
+            return new UserData(1, "Micheal", "Shodamola", data.UserName);
         }
 
-        if ((CompareValues(data.UserName, "Micheal")) && (CompareValues(data.Password, "Shodammola")))
+        if ((CompareValues(data.UserName, "Micheal")) && (CompareValues(data.Password, "Shodamola")))
         {
             return new UserData(1, "Mike", "Mic", data.UserName);
         }
